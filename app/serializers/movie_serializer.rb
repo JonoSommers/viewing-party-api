@@ -6,7 +6,7 @@ class MovieSerializer
         { data:
             movies[:results].map do |movie|
                 {
-                    id: movie[:id].to_s,
+                    id: movie[:id],
                     type: "movie",
                     attributes: {
                         title: movie[:original_title],
