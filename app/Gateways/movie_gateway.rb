@@ -4,6 +4,11 @@ class MovieGateway
         json = JSON.parse(response.body, symbolize_names: true)
     end
 
+    def self.movies_title_search(title)
+        response = conn.get("/3/search/movie", { query: title })
+        json = JSON.parse(response.body, symbolize_names: true)
+    end
+
     private
     
     def self.conn
