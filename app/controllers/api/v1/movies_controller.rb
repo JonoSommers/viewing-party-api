@@ -1,6 +1,6 @@
 class Api::V1::MoviesController < ApplicationController
     def index
-        top_rated = MovieGateway.top_rated_movies
-        render json: MovieSerializer.format_movie(top_rated)
+        params[:title] ? movies = MovieGateway.movies_title_search(params[:title]) : movies = MovieGateway.top_rated_movies
+        render json: MovieSerializer.format_movie(movies)
     end
 end
