@@ -15,9 +15,7 @@ RSpec.describe "Movies API", type: :request do
             expect(json[:data][0][:attributes]).to have_key(:vote_average)
             expect(json[:meta][:count]).to eq(20)
         end
-    end
 
-    describe '#' do
         it 'can retrieve the top 20 movies with titles that match the query param', :vcr do
 
             get "/api/v1/movies?title=Lord"
