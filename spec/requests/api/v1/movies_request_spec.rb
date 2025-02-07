@@ -9,11 +9,11 @@ RSpec.describe "Movies API", type: :request do
             expect(response).to be_successful
             json = JSON.parse(response.body, symbolize_names: true)
             
-            expect(json[:data][0][:id]).to be_a(Integer)
-            expect(json[:data][0][:type]).to eq("movie")
-            expect(json[:data][0][:attributes]).to have_key(:title)
-            expect(json[:data][0][:attributes]).to have_key(:vote_average)
-            expect(json[:meta][:count]).to eq(20)
+            expect(json[:data][0][:id]).to be_a (Integer)
+            expect(json[:data][0][:type]).to eq ("movie")
+            expect(json[:data][0][:attributes]).to have_key (:title)
+            expect(json[:data][0][:attributes]).to have_key (:vote_average)
+            expect(json[:meta][:count]).to eq (20)
         end
 
         it 'can retrieve the top 20 movies with titles that match the query param', :vcr do
@@ -23,12 +23,12 @@ RSpec.describe "Movies API", type: :request do
             expect(response).to be_successful
             json = JSON.parse(response.body, symbolize_names: true)
 
-            expect(json[:data][0][:id]).to be_a(Integer)
-            expect(json[:data][0][:type]).to eq("movie")
-            expect(json[:data][0][:attributes]).to have_key(:title)
-            expect(json[:data][0][:attributes][:title]).to match(/lord/i)
-            expect(json[:data][0][:attributes]).to have_key(:vote_average)
-            expect(json[:meta][:count]).to eq(20)
+            expect(json[:data][0][:id]).to be_a (Integer)
+            expect(json[:data][0][:type]).to eq ("movie")
+            expect(json[:data][0][:attributes]).to have_key (:title)
+            expect(json[:data][0][:attributes][:title]).to match (/lord/i)
+            expect(json[:data][0][:attributes]).to have_key (:vote_average)
+            expect(json[:meta][:count]).to eq (20)
         end
     end
 end
