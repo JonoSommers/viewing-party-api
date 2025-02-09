@@ -24,7 +24,7 @@ class ViewingParty < ApplicationRecord
         movie = MovieGateway.get_movie_data(viewing_party[:movie_id])
         party_duration = (viewing_party[:end_time].to_i - viewing_party[:start_time].to_i) / 60
         movie_length = movie[:runtime]
-        if party_duration < movie_length
+        if (party_duration > 0) && (party_duration < movie_length)
             raise StandardError, 'You cannot create a viewing party that will be shorter than the movie length'
         end
     end
