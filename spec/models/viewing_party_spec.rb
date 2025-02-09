@@ -13,7 +13,7 @@ RSpec.describe "Viewing Parties Model Methods", type: :request do
         )
         @invitees_param = [@invitee_1.id, @invitee_2.id]
     end
-    describe 'self.add_invitees_to_joins_table' do
+    describe '#self.add_invitees_to_joins_table(invitees_param, party)' do
         it 'should create invitee records on the joins table', :vcr do
             ViewingParty.add_invitees_to_joins_table(@invitees_param, @viewing_party1)
 
@@ -26,9 +26,22 @@ RSpec.describe "Viewing Parties Model Methods", type: :request do
         end
     end
 
-    describe 'check_if_party_ends_before_starting' do
+    describe '#check_if_party_ends_before_starting(starting_time, ending_time)' do
         it 'should throw an error if the start time is after the end time', :vcr do
             expect{@viewing_party1.check_if_party_ends_before_starting(@viewing_party1.start_time, @viewing_party1.end_time)}.to raise_error(StandardError, 'Your start time cannot be after your end time')
+        end
+    end
+
+    describe '#self.compare_runtime_to_party_time(viewing_party)' do
+        it 'should throw an error if the party length is shorter than the movie runtime', :vcr do
+            viewing_party = ViewingParty.create(name: "Jono's Bday Movie Bash!", 
+                start_time: "2025-02-01 10:30:00", 
+                end_time: "2025-02-01 11:00:00", 
+                movie_id: 278, 
+                movie_title: "The Shawshank Redemption"
+            )
+
+            expect{ViewingParty.compare_runtime_to_party_time(viewing_party)}.to raise_error(StandardError, 'You cannot create a viewing party that will be shorter than the movie length')
         end
     end
 end

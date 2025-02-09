@@ -4,6 +4,7 @@ class Api::V1::ViewingPartiesController < ApplicationController
         user = User.find(params[:user_id])
         viewing_party = user.viewing_parties.create!(party_params)
         viewing_party.check_if_party_ends_before_starting(params[:start_time], params[:end_time])
+        ViewingParty.compare_runtime_to_party_time(viewing_party)
         ViewingParty.add_invitees_to_joins_table(params[:invitees], viewing_party)
         render json: ViewingPartySerializer.new(viewing_party)
     end
