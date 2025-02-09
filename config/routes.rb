@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :movies, only: :index
-      resources :users, only: [:create, :index]
+      resources :users, only: [:create, :index] do
+        resources :viewing_parties, only: :create
+      end
       resources :sessions, only: :create
     end
   end
