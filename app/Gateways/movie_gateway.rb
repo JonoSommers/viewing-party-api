@@ -17,7 +17,7 @@ class MovieGateway
         movies.reverse
     end
 
-    def self.get_movie_runtime(movie_id)
+    def self.get_movie_data(movie_id)
         response = conn.get("/3/movie/#{movie_id}")
         json = JSON.parse(response.body, symbolize_names: true)
     end
