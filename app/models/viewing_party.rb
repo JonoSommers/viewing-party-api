@@ -19,4 +19,8 @@ class ViewingParty < ApplicationRecord
             raise StandardError, 'Your start time cannot be after your end time'
         end
     end
+
+    def compare_runtime_to_party_time(viewing_party_)
+
+    end
 end
