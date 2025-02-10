@@ -8,7 +8,7 @@ RSpec.describe "Users viewing Party Requests", type: :request do
             viewing_party = ViewingParty.create(name: "Movie Night", start_time: "2025-02-15 20:00:00", end_time: "2025-02-15 22:30:00", movie_id: 123, movie_title: "Inception")
             users_viewing_party = UsersViewingParty.create(user_id: user.id, viewing_party_id: viewing_party.id, host: true)
 
-            patch "/api/v1/users/#{user.id}/viewing_parties/#{viewing_party.id}/users_viewing_parties/#{users_viewing_party.id}", params: { invitee_id: invitee.id }, as: :json
+            patch "/api/v1/users/#{user.id}/viewing_parties/#{viewing_party.id}/users_viewing_parties/#{users_viewing_party.id}", params: { invitee_id: invitee.id }, as: :json 
             
             expect(response).to be_successful
             json = JSON.parse(response.body, symbolize_names: true)
