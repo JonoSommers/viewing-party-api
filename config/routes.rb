@@ -11,9 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :movies, only: :index
       resources :users, only: [:create, :index] do
-        resources :viewing_parties, only: :create do
-          resources :users_viewing_parties, only: :update
-        end
+        resources :viewing_parties, only: :create
       end
       resources :sessions, only: :create
     end
