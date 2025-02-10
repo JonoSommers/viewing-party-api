@@ -14,4 +14,14 @@ class UsersViewingParty < ApplicationRecord
     def host_not_set?
         self.host.nil?
     end
+
+    def self.add_new_invitee_to_party(user_id, party_id, id, invitee_id)
+        User.find(user_id)
+        viewing_party = ViewingParty.find(party_id)
+        UsersViewingParty.find(id)
+        already_invited = UsersViewingParty.find_by(user_id: invitee_id, viewing_party_id: viewing_party.id)
+        if already_invited.nil?
+            UsersViewingParty.create(user_id: invitee_id, viewing_party_id: viewing_party.id, host: false)
+        end
+    end
 end

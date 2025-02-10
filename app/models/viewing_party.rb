@@ -10,7 +10,10 @@ class ViewingParty < ApplicationRecord
 
     def self.add_invitees_to_joins_table(invitees_param, party)
         invitees_param.each do |invitee_id|
-            UsersViewingParty.create(user_id: invitee_id, viewing_party_id: party.id, host: false)
+            already_invited = UsersViewingParty.find_by(user_id: invitee_id, viewing_party_id: party.id)
+            if already_invited.nil?
+                UsersViewingParty.create(user_id: invitee_id, viewing_party_id: party.id, host: false)
+            end
         end
     end
 
